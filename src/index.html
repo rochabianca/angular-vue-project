@@ -1,13 +1,47 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>AngularVueTest</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-custom-element@3.0.0/dist/vue-custom-element.js"></script>
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
+<script>
+  const MyVueWebComp = {
+    template: `
+    <div style="background: #41B883; color: white; padding: 5px 15px; border-radius: 5px; margin: 3rem 0; text-align:center">
+      <h2>Olá, eu sou um componente Vue em um projeto Angular!</h2>
+      <p>Uma curiosidade, meu pokemon favorito é o <b>{{bestInitialEver}}</b></p>
+    </div>
+    `,
+    data() {
+      return {
+        initialsPokemons: ['Charmander', 'Squirtle', 'Bubassaur', 'Pikachu']
+      };
+    },
+    computed: {
+      bestInitialEver() {
+        const random = parseInt(Math.random() * (4 - 0) + 0);
+        return this.initialsPokemons[random];
+      }
+    },
+    methods: {
+      addText() {
+        this.texts.push(this.text);
+        this.text = '';
+      }
+    }
+  };
+  Vue.customElement('my-vue-web-comp', MyVueWebComp);
+</script>
+
 </html>
